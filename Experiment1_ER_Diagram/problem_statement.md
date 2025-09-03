@@ -108,16 +108,15 @@ A popular restaurant wants to manage reservations, orders, and billing.
 ### ER Diagram:
 *Paste or attach your diagram here*  
 ![ER Diagram](er_diagram_restaurant.png)
+<img width="1212" height="771" alt="image" src="https://github.com/user-attachments/assets/a052c010-7d1d-4b5c-84ec-b92e483a898a" />
+
 
 ### Entities and Attributes
+<img width="915" height="561" alt="image" src="https://github.com/user-attachments/assets/9b191176-ae21-484d-8eac-4c5a87f3d9db" />
+<img width="923" height="250" alt="image" src="https://github.com/user-attachments/assets/2533f9ce-3786-44a1-986d-7238df42901e" />
 
-| Entity | Attributes (PK, FK) | Notes |
-|--------|--------------------|-------|
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
-|        |                    |       |
+
+
 
 ### Relationships and Constraints
 
@@ -134,10 +133,3 @@ A popular restaurant wants to manage reservations, orders, and billing.
 
 ---
 
-## Instructions for Students
-
-1. Complete **all three scenarios** (A, B, C).  
-2. Identify entities, relationships, and attributes for each.  
-3. Draw ER diagrams using **draw.io / diagrams.net** or hand-drawn & scanned.  
-4. Fill in all tables and assumptions for each scenario.  
-5. Export the completed Markdown (with diagrams) as **a single PDF**
