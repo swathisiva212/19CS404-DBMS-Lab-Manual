@@ -1,229 +1,371 @@
-# Experiment 1: Entity-Relationship (ER) Diagram
+# ER Diagram Workshop – Submission Template
 
-## 🎯 Objective:
-To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+## Objective
+To understand and apply ER modeling concepts by creating ER diagrams for real-world applications.
 
-## 📚 Purpose:
-The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
-
----
-
-## 🧪 Choose One Scenario:
-
-### 🔹 Scenario 1: University Database
-Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
-
-**User Requirements:**
-- Academic programs grouped under departments.
-- Students have admission number, name, DOB, contact info.
-- Instructors with staff number, contact info, etc.
-- Courses have number, name, credits.
-- Track course enrollments by students and enrollment date.
-- Add support for prerequisites (some courses require others).
+## Purpose
+Gain hands-on experience in designing ER diagrams that represent database structure including entities, relationships, attributes, and constraints.
 
 ---
 
-### 🔹 Scenario 2: Hospital Database
-Design a database for patient management, appointments, medical records, and billing.
+# Scenario A: City Fitness Club Management
 
-**User Requirements:**
-- Patient details including contact and insurance.
-- Doctors and their departments, contact info, specialization.
-- Appointments with reason, time, patient-doctor link.
-- Medical records with treatments, diagnosis, test results.
-- Billing and payment details for each appointment.
+**Business Context:**  
+FlexiFit Gym wants a database to manage its members, trainers, and fitness programs.
 
----
+**Requirements:**  
+- Members register with name, membership type, and start date.  
+- Each member can join multiple programs (Yoga, Zumba, Weight Training).  
+- Trainers assigned to programs; a program may have multiple trainers.  
+- Members may book personal training sessions with trainers.  
+- Attendance recorded for each session.  
+- Payments tracked for memberships and sessions.
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
+### ER Diagram:
+*Paste or attach your diagram here*  
 
-# ER Diagram Submission - V. THIRUMALAI 
+<img width="1013" height="747" alt="image" src="https://github.com/user-attachments/assets/b2bd03ab-b182-4fe4-beb8-bee7e53435d4" />
 
-## Scenario Chosen:
-Hospital
 
-## ER Diagram:
-![Screenshot 2025-04-29 083123](https://github.com/user-attachments/assets/4b5c26be-d9da-4cea-b369-df4e7b85d88c)
+### Entities and Attributes
 
+1.MembershipType
 
-## Entities and Attributes:
-- PATIENT
+MemberID (Primary Key)
 
-P-ID
+Name
 
-PH-NO
+StartDate
 
-AGE
+2.PersonalTrainingSession
 
-GENDER
+SessionID (Primary Key)
 
-- DOCTOR
+Date
 
-DEPT
+Time
 
-QUALIFICATION
+Duration
 
-- NURSE
+3.Trainer
 
-N-ID
+TrainerID (Primary Key)
 
-E-ID
+Specialization
 
-- RECEPTIONIST (No specific attributes shown)
+4.Payment
 
-- ROOMS
+PaymentID (Primary Key)
 
-R-ID
+PaymentNo
 
-TYPE
+Date
 
-CAPACITY
+Amount
 
-- BILLS
+PaymentType
 
-B-ID
+5.Attendance 
 
-P-ID
+Attendance
 
-AMOUNT
+AttendanceDate
 
-- TEST REPORT
+Status
 
-TEST-TYPE
+<img width="920" height="537" alt="image" src="https://github.com/user-attachments/assets/e355852c-8246-4224-a4eb-5cdea7760441" />
 
-P-ID
 
-RESULT
+### Relationships and Constraints
 
-- RECORDS
+1.MembershipType - MemberProgram - Trainer
+Relationship: MemberProgram
+Cardinality: Many MembershipTypes to Many Trainers
+Participation: Partial on both sides (not all members may have programs or trainers, and trainers may work with multiple members)
 
-R-NO
+2.MembershipType - PersonalTrainingSession - Trainer
+Relationship: PersonalTrainingSession
+Cardinality: One MembershipType can have many PersonalTrainingSessions (1:N), and many sessions may be conducted by one Trainer (N:1)
+Participation: Total on sessions (each session must link membership and trainer), partial on MembershipType and Trainer
 
-APP-NO
+3.PersonalTrainingSession - Attendance
+Relationship: Attendance
+Cardinality: One PersonalTrainingSession can have many Attendance records (1:N)
+Participation: Total on Attendance (each attendance record must reference a session), partial on session
 
+4.Trainer - Payment
+Relationship: Trainer makes Payment
+Cardinality: One Trainer may have multiple Payments (1:N)
+Participation: Partial on both sides (trainers may or may not have payments, payments are linked to one trainer)
+<img width="947" height="630" alt="image" src="https://github.com/user-attachments/assets/29dbc172-4a0b-4d4c-8107-d9573febf8f8" />
 
+## Constraints:
+1.MembershipType is uniquely identified by MemberID; Session by SessionID; Trainer by TrainerID; and Payment by PaymentID.
 
-## Relationships and Constraints:
-- CONSULTS
+2.PersonalTrainingSession depends on MembershipType and Trainer (associative relationship).
 
-Between: PATIENT and DOCTOR
+3.Attendance tracks each member’s participation in training sessions with attributes like attendance date and status.
 
-Constraint: Many-to-Many (M:N)
+4.Payments are tied to trainers to record transactions such as fees received.
 
-A patient can consult multiple doctors, and a doctor can be consulted by multiple patients.
 
-- PAYS
+### Assumptions
+Each member must have a unique membership type assigned.
 
-Between: PATIENT and BILLS
+Trainers specialize in specific areas and conduct personal
+# Scenario B: City Library Event & Book Lending System
 
-Constraint: One-to-Many (1:N)
+**Business Context:**  
+The Central Library wants to manage book lending and cultural events.
 
-A patient can pay many bills, but each bill is linked to one patient.
+**Requirements:**  
+- Members borrow books, with loan and return dates tracked.  
+- Each book has title, author, and category.  
+- Library organizes events; members can register.  
+- Each event has one or more speakers/authors.  
+- Rooms are booked for events and study.  
+- Overdue fines apply for late returns.
 
-- HAS
+### ER Diagram:
+*Paste or attach your diagram here*  
+<img width="989" height="758" alt="Screenshot 2025-09-03 170014" src="https://github.com/user-attachments/assets/f9be8ec7-c9aa-4897-ba8b-d0881d9696e4" />
 
-Between: PATIENT and TEST REPORT
 
-Constraint: One-to-Many (1:N)
+### Entities and Attributes
 
-A patient can have multiple test reports, but each test report is linked to one patient.
+<img width="1221" height="272" alt="image" src="https://github.com/user-attachments/assets/d6325ca6-6d30-4e82-a57a-baa5a0f249f8" />
 
-- GOVERNS
 
-Between: NURSE and ROOMS
+### Relationships and Constraints
 
-Constraint: Many-to-Many (M:N)
+<img width="1272" height="405" alt="image" src="https://github.com/user-attachments/assets/fe64ff90-1e6b-4a8b-9e7e-1a84f20c4105" />
 
-A nurse can govern multiple rooms, and a room can be governed by multiple nurses.
 
-- MAINTAINS
+### Assumptions
+A member must exist before borrowing books or registering for events.
+A book may or may not be borrowed; not all books will always have loans.
+Fines are only generated if a book is returned late.
+# Scenario C: Restaurant Table Reservation & Ordering
 
-Between: RECEPTIONIST and RECORDS
+**Business Context:**  
+A popular restaurant wants to manage reservations, orders, and billing.
 
-Constraint: One-to-Many (1:M)
+**Requirements:**  
+- Customers can reserve tables or walk in.  
+- Each reservation includes date, time, and number of guests.  
+- Customers place food orders linked to reservations.  
+- Each order contains multiple dishes; dishes belong to categories (starter, main, dessert).  
+- Bills generated per reservation, including food and service charges.  
+- Waiters assigned to serve reservations.
 
-A receptionist maintains multiple records.
+### ER Diagram:
+*Paste or attach your diagram here*  
+<img width="1212" height="771" alt="Screenshot 2025-09-03 133439" src="https://github.com/user-attachments/assets/67b0cd5e-9893-4bf8-afdb-f26a8bfe7817" />
 
 
+### Entities and Attributes
+1.customers
 
-## Extension (Prerequisite / Billing):
--Entities Involved:
-PATIENT,BILLS
+CustomerID (PK)
 
-Relationship:
-PAYS (between PATIENT and BILLS)
+Name
 
-Attributes Used:
-In PATIENT: P-ID
+Phone
 
-In BILLS: B-ID, P-ID, AMOUNT
+2.reservations
 
-- Modeling Explanation:
-Each PATIENT can pay multiple BILLS — this is shown via a 1:N relationship from PATIENT to BILLS.
+ReservationID (PK)
 
-The PAYS relationship logically ties each bill to a patient using P-ID as a foreign key in the BILLS entity.
+CustomerID (FK)
 
-Each BILL has a unique B-ID, an AMOUNT, and references a single PATIENT (P-ID).
+WaiterID (FK)
 
-This approach simplifies billing by:
+NumGuests
 
-Allowing historical tracking of multiple bills per patient.
+Date & Time
 
-Associating each billing record with the corresponding patient.
+3.waiter
 
-## Design Choices:
-PATIENT, DOCTOR, NURSE, RECEPTIONIST
+WaiterID (PK)
 
-Chosen as entities because they represent key actors in the hospital system, each with their own attributes and responsibilities.
+Name
 
-ROOMS
+4.orders
 
-Modeled as a separate entity to manage space allocation, with attributes like TYPE and CAPACITY.
+OrderID (PK)
 
-BILLS, TEST REPORT, RECORDS
+ReservationID (FK)
 
-Represent important operational and administrative data, each requiring independent storage and relationships to patients or staff.
+OrderTime
 
--  Relationship Choices:
-CONSULTS (PATIENT—DOCTOR)
+5.order_details
 
-Many-to-many to reflect real-life scenarios where multiple patients consult multiple doctors.
+OrderDetailID (PK)
 
-PAYS (PATIENT—BILLS)
+OrderID (FK)
 
-One-to-many, as one patient can pay multiple bills.
+DishID (FK)
 
-HAS (PATIENT—TEST REPORT)
+Quantity
 
-One-to-many, since a patient may have several test reports.
+6.dishes
 
-GOVERNS (NURSE—ROOMS)
+DishID (PK)
 
-Many-to-many because nurses may be assigned to multiple rooms and rooms may be overseen by multiple nurses during shifts.
+Name
 
-MAINTAINS (RECEPTIONIST—RECORDS)
+Price
 
-One-to-many, as one receptionist maintains several patient records.
+CategoryID (FK)
 
-## RESULT
-The ER model successfully captures the core components of a hospital management system, including patients, doctors, nurses, rooms, billing, test reports, and administrative functions. It clearly defines:
+7.categories
 
-Entities such as PATIENT, DOCTOR, NURSE, RECEPTIONIST, ROOMS, BILLS, TEST REPORT, and RECORDS.
+CategoryID (PK)
 
-Relationships like CONSULTS, PAYS, HAS, GOVERNS, and MAINTAINS to show interactions between the entities.
+CategoryName
 
-Attributes that support effective tracking of patient details, test outcomes, billing amounts, and room allocations.
+8.tables
 
-Constraints (1:N, M:N) that mirror real-world hospital operations, allowing many-to-many or one-to-many interactions where appropriate.
+TableID (PK)
 
-This model lays the groundwork for designing a relational database or hospital software system that ensures accurate data flow, traceability of patient care, and efficient administrative management.
+Capacity
 
+9.reservation_tables
 
+ReservationTableID (PK)
+
+ReservationID (FK)
+
+TableID (FK)
+
+10.bill
+
+BillID (PK)
+
+ReservationID (FK)
+
+TotalAmount
+
+PaymentStatus
+| Entity          | Attributes (PK, FK)                                                                                           | Notes                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Customer**    | customer\_id (PK), name, phone\_no, email, address                                                            | Customers who reserve tables and place orders                   |
+| **Reservation** | reservation\_id (PK), reservation\_date, reservation\_time, no\_of\_guests, customer\_id (FK), table\_id (FK) | Links customers with reserved tables                            |
+| **Table**       | table\_id (PK), table\_no, capacity, status                                                                   | Represents restaurant tables and their availability             |
+| **Order**       | order\_id (PK), order\_date, order\_time, customer\_id (FK), table\_id (FK), total\_amount, status            | Represents customer orders                                      |
+| **Order\_Item** | order\_item\_id (PK), order\_id (FK), menu\_item\_id (FK), quantity, price                                    | Line items for each order                                       |
+| **Menu\_Item**  | menu\_item\_id (PK), name, description, price, category                                                       | Menu items available for ordering                               |
+| **Payment**     | payment\_id (PK), order\_id (FK), amount, payment\_date, payment\_mode, status                                | Records payments for orders                                     |
+| **Staff**       | staff\_id (PK), name, role, phone\_no                                                                         | Staff responsible for managing tables, reservations, or serving |
+| **Bill**        | bill\_id (PK), order\_id (FK), amount, tax, discount, final\_amount                                           | Represents the bill generated for each order                    |
+
+
+
+## Relationships  ,Cardinality, Participation
+1.customers - reservations
+
+Relationship: Makes
+
+Cardinality: One customer can make many reservations (1:N)
+
+Participation: Partial on customer side (not all customers may have reservations) and total on reservation side (each reservation must have one customer)
+
+2.reservations - waiter
+
+Relationship: Assigned to
+
+Cardinality: Many reservations can be assigned to one waiter (N:1)
+
+Participation: Total on reservation side (each reservation has a waiter), partial on waiter side (waiter can serve many or none)
+
+3.reservations - orders
+
+Relationship: Has
+
+Cardinality: One reservation can have many orders (1:N)
+
+Participation: Total on orders side (order must have a reservation), partial on reservation side (reservation may have orders or not)
+
+orders - order_details
+
+Relationship: Contains
+
+Cardinality: One order can have many order details (1:N)
+
+Participation: Total on order_details side (each order detail belongs to an order), total on orders (orders have order details)
+
+4.order_details - dishes
+
+Relationship: Contains (or Includes)
+
+Cardinality: Many order_details can include one dish (N:1)
+
+Participation: Total on order_details, partial on dishes (some dishes may not be ordered)
+
+5.dishes - categories
+
+Relationship: Belongs to
+
+Cardinality: Many dishes to one category (N:1)
+
+Participation: Partial on dishes, total on categories
+
+reservations - reservation_tables
+
+6.Relationship: Includes (or Uses)
+
+Cardinality: One reservation can have many reservation_tables (1:N)
+
+Participation: Total on reservation_tables, partial on reservations
+
+7.tables - reservation_tables
+
+Relationship: Reserved in
+
+Cardinality: One table can appear in many reservation_tables (1:N)
+
+Participation: Total on reservation_tables, partial on tables
+
+reservations - customers (again via reservations entity)
+
+8.Relationship: Made by
+
+Cardinality: One customer can have many reservations (1:N)
+
+9.bill - reservations
+
+Relationship: Generated for
+
+Cardinality: One bill for one reservation (1:1)
+
+Participation: Total on bill side (each bill is for one reservation), partial on reservation side (reservation may or may not have bills)
+| Relationship             | Cardinality | Participation                             | Notes                                                                           |
+| ------------------------ | ----------- | ----------------------------------------- | ------------------------------------------------------------------------------- |
+| Customer – Reservation   | 1 : M       | Total on Reservation, Partial on Customer | A customer can make many reservations; each reservation belongs to one customer |
+| Table – Reservation      | 1 : M       | Total on Reservation                      | A table can have many reservations, but each reservation is for one table       |
+| Customer – Order         | 1 : M       | Partial on Customer, Total on Order       | A customer can place multiple orders; each order belongs to one customer        |
+| Table – Order            | 1 : M       | Total on Order                            | Orders are linked to the table where the customer is seated                     |
+| Order – Order\_Item      | 1 : M       | Total on Order\_Item                      | An order can contain multiple order items                                       |
+| Menu\_Item – Order\_Item | 1 : M       | Total on Order\_Item                      | Each order item refers to one menu item                                         |
+| Order – Payment          | 1 : 1       | Total                                     | Each order must have one payment                                                |
+| Order – Bill             | 1 : 1       | Total                                     | A bill is generated for each order                                              |
+| Staff – Reservation      | 1 : M       | Optional on Reservation                   | Staff may manage multiple reservations                                          |
+| Staff – Order            | 1 : M       | Optional on Order                         | Staff may serve multiple orders                                                 |
+
+
+### Assumptions
+1.Each customer must register before making a reservation or placing an order.
+
+2.Reservations are assigned to specific tables and waiters.
+
+3.Menu items are specific to each restaurant and prices can change over time.
+
+4.Payment is made per order and tracked in the system.
+
+5.Employees are assigned to one restaurant and have defined roles like waiter or manager.
+
+6.The system supports real-time tracking of table availability and order status.
+
+7.Historical data of orders, payments, and reservations are stored for reporting and auditing.
+## RESULT:
+City Fitness Club Management, City Library Event & Book Lending System, and Restaurant Table Reservation & Ordering systems all improve operational efficiency by automating booking and scheduling processes. They enhance user experience by providing real-time availability and reducing wait times. Each system supports accurate tracking of resources—whether trainers, books, or tables—and manages payments seamlessly. Automated reminders reduce no-shows, while data reporting helps optimize resource use and business decisions. Overall, these systems increase customer satisfaction, streamline operations, and boost revenue.
