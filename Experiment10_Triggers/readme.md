@@ -223,3 +223,4 @@ INSERT INTO employees (emp_id, emp_name, salary) VALUES (102, 'Jane Smith', 3500
 
 ## RESULT
 Thus, the PL/SQL trigger programs were written and executed successfully.
+
